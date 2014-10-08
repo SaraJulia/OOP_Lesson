@@ -9,13 +9,31 @@ GAME_BOARD = None
 DEBUG = False
 ######################
 
-GAME_WIDTH = 3
-GAME_HEIGHT = 3
+GAME_WIDTH = 5
+GAME_HEIGHT = 5
 
 #### Put class definitions here ####
-pass
+class Rock(GameElement):
+    IMAGE = "Rock"
 ####   End class definitions    ####
 
 def initialize():
     """Put game initialization code here"""
-    pass
+    
+    # Initialize and Register a whole bunch of rocks
+    rock_positions = [
+        (2,1),
+        (1,2),
+        (3,2),
+        (2,3)
+    ]
+
+    rocks = []
+    for pos in rock_positions:
+        rock = Rock()
+        GAME_BOARD.register(rock)
+        GAME_BOARD.set_el(pos[0], pos[1], rock)
+        rocks.append(rock)
+
+    for rock in rocks:
+        print rock
