@@ -62,12 +62,24 @@ class Character(GameElement):
             self.board.erase_msg()
 
         self.board.draw_msg('%s moves %s' % (self.IMAGE, direction)) 
-
+        
         if direction:
+
+ 
             next_location = self.next_pos(direction)
             if next_location:
                 next_x = next_location[0]
-                next_y = next_location[1]
+                next_y = next_location[1] 
+                print next_x
+                print next_y     
+
+                if next_x < 0 or next_x >= GAME_WIDTH:
+                    
+                    next_x = next_x % GAME_WIDTH
+                    #self.board.set_el(next_x, next_y, self)
+                elif next_y < 0 or next_y >= GAME_HEIGHT:
+                    next_y = next_y % GAME_HEIGHT
+                    #self.board.set_el(next_x, next_y, self)
 
                 existing_el = self.board.get_el(next_x, next_y)
 
@@ -79,6 +91,11 @@ class Character(GameElement):
                 elif existing_el is None or not existing_el.SOLID:
                     self.board.del_el(self.x, self.y)
                     self.board.set_el(next_x, next_y, self)
+
+                #
+
+                
+               
 
             # if next_location:
             #     next_x = next_location[0]
