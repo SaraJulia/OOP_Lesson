@@ -17,6 +17,14 @@ class Rock(GameElement):
     IMAGE = "Rock"
     SOLID = True
 
+class Gem(GameElement):
+    IMAGE = "BlueGem"
+    SOLID = False
+
+    def interact(self, player):
+        player.inventory.append(self)
+        GAME_BOARD.draw_msg("You just acquired a gem! You have %d items!" %(len(player.inventory)))
+
 
 class Character(GameElement):
     IMAGE = "Princess"
@@ -31,6 +39,10 @@ class Character(GameElement):
         elif direction == 'right':
             return (self.x +1, self.y)
         return None
+
+    def __init__(self):
+        GameElement.__init__(self)
+        self.inventory = []
 
     def keyboard_handler(self, symbol, modifier):
         direction = None
@@ -58,6 +70,9 @@ class Character(GameElement):
                 next_y = next_location[1]
 
                 existing_el = self.board.get_el(next_x, next_y)
+
+                if existing_el:
+                    existing_el.interact(self)
 
                 if existing_el and existing_el.SOLID:
                     self.board.draw_msg("There's something in my way!")
@@ -103,3 +118,9 @@ def initialize():
     print player
 
     GAME_BOARD.draw_msg("This game is wicked awesome. Because we're Bostonites")
+
+    gem = Gem()
+    GAME_BOARD.register(gem)
+    GAME_BOARD.set_el(3, 1, gem)
+
+
