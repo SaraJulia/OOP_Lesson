@@ -118,7 +118,7 @@ class EnemyBug(GameElement):
             #print self.x, self.y
             if existing_el:
                 print existing_el
-                #self.interact(existing_el)
+                self.interact(existing_el)
             if not existing_el or existing_el.SOLID == False:
                 self.board.del_el(self.x, self.y)
                 self.board.set_el(next_x, self.y, self)
