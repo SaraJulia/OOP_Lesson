@@ -112,16 +112,16 @@ class EnemyBug(GameElement):
 
         if next_x < 0 or next_x >= self.board.width:
             self.direction *= -1
-            next_x = self.x
-
-        existing_el = self.board.get_el(next_x, self.y)
-        print self.x, self.y
-        if existing_el:
-            print existing_el
-            #self.interact(existing_el)
-        if not existing_el or existing_el.SOLID == False:
-            self.board.del_el(self.x, self.y)
-            self.board.set_el(next_x, self.y, self)
+            #next_x = self.x
+        else:
+            existing_el = self.board.get_el(next_x, self.y)
+            #print self.x, self.y
+            if existing_el:
+                print existing_el
+                #self.interact(existing_el)
+            if not existing_el or existing_el.SOLID == False:
+                self.board.del_el(self.x, self.y)
+                self.board.set_el(next_x, self.y, self)
 
     def interact(self, player):
 
