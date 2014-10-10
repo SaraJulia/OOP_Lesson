@@ -115,6 +115,7 @@ class EnemyBug(GameElement):
             next_x = self.x
 
         existing_el = self.board.get_el(next_x, self.y)
+        print self.x, self.y
         if existing_el:
             print existing_el
             #self.interact(existing_el)
