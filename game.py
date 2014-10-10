@@ -17,6 +17,9 @@ class Rock(GameElement):
     IMAGE = "Rock"
     SOLID = True
 
+    # def interact(self, player):
+    #     pass
+
 class Wall(GameElement):
     IMAGE = "Wall"
     SOLID = True
@@ -73,12 +76,12 @@ class Chest_Closed(GameElement):
 
 
     def interact(self, player):
-        if 'key' in player.inventory and self.IMAGE == 'Chest':
-            self.change_image('Star')
-            #self.SOLID = False 
+        if 'gem' in player.inventory and self.IMAGE == 'Chest':
+            self.change_image('Star') 
             GAME_BOARD.draw_msg("Get the Star and finish the game!!!") 
         elif self.IMAGE == 'Star':
             self.SOLID = False
+            GAME_BOARD.draw_msg("Hooray! You WON!!!!!")
         else:
             GAME_BOARD.draw_msg("You don't have enough gems!!")
 
@@ -154,6 +157,7 @@ class Character(GameElement):
 
                 if existing_el:
                     existing_el.interact(self)
+                
 
                 if existing_el and existing_el.SOLID:
                     self.board.draw_msg("There's something in my way!")
