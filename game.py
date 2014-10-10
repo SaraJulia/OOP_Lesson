@@ -18,6 +18,10 @@ class Rock(GameElement):
     IMAGE = "Rock"
     SOLID = True
 
+class Tree(GameElement):
+    IMAGE = "TallTree"
+    SOLID = True
+
 class Wall(GameElement):
     # Walls are solid by defailt and have the image of a low wal
     IMAGE = "Wall"
@@ -237,6 +241,8 @@ def initialize():
         (2,1),
         (1,2),
         (3,2),
+        (0,6),
+        (6,0),
         (2,3)
     ]
 
@@ -253,7 +259,10 @@ def initialize():
         (7, 5),
         (6, 5),
         (5, 5),
-        (5, 7)
+        (5, 7),
+        (4, 2),
+        (5, 2),
+        (6, 2)
     ]
     walls = []
     for pos in wall_positions:
@@ -261,6 +270,22 @@ def initialize():
         GAME_BOARD.register(wall)
         GAME_BOARD.set_el(pos[0], pos[1], wall)
         walls.append(wall)
+
+    tree_positions = [
+        (2,6),
+        (2,5),
+        (3,5),
+        (3,6)
+
+    ]
+
+    trees = []
+    for pos in tree_positions:
+        tree = Tree()
+        GAME_BOARD.register(tree)
+        GAME_BOARD.set_el(pos[0], pos[1], tree)
+        rocks.append(tree)
+
 
     
     doorclosed = DoorClosed()
